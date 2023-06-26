@@ -1,6 +1,6 @@
 # Amazon.com Product Recommendation System Web Application Using MongoDB, PySpark, & Apache Kafka:
 
-This repository builds upon the work of [**Exploratory Data Analysis (EDA) on Amazon Review Data (2018) Using MongoDB & PySpark**](https://github.com/huzaifakhan04/exploratory-data-analysis-on-amazon-review-data-using-mongodb-and-pyspark) and includes a web application that is connected to a product recommendation system developed with the comprehensive Amazon Review Data (2018) dataset, consisting of nearly 233.1 million records and occupying approximately 128 gigabytes (GB) of data storage, using MongoDB and PySpark, as part of the final project for the Fundamental of Big Data Analytics (DS2004) course.
+This repository builds upon the work of [**Exploratory Data Analysis (EDA) on Amazon Review Data (2018) Using MongoDB & PySpark**](https://github.com/huzaifakhan04/exploratory-data-analysis-on-amazon-review-data-using-mongodb-and-pyspark) and includes a web application that is connected to a product recommendation system developed with the comprehensive Amazon Review Data (2018) dataset, consisting of nearly 233.1 million records and occupying approximately 128 gigabytes (GB) of data storage, using MongoDB, PySpark, and Apache Kafka, as part of the final project for the Fundamental of Big Data Analytics (DS2004) course.
 
 ### Dependencies:
 
@@ -55,7 +55,7 @@ Alternating Least Squares (ALS) has several advantages for product recommendatio
 * Run ``src\data.py`` to save the dataset from the JavaScript Object Notation (JSON) file into a MongoDB database as a collection (make sure that MongoDB is already set up and running).
 * Once the data is stored, run ``src\compress.py`` to extract a stratified random sample of a specified size from the dataset stored in MongoDB and save the sample as an Apache Parquet file.
 * Execute the ``Product Recommendation Model.ipynb`` file (1-16) to transform the collection and store it back in MongoDB for permanent access (you don't have to execute the entire file).
-* Open a Terminal instance and run ``app\recommendation.py`` on the side.
+* Open a Terminal instance and run ``app\recommendation.py`` on the side (make sure that an Apache Kafka cluster has been successfully established and is operational, with two topics named **credentials** and **recommendations**).
 * Open a separate Terminal instance to run ``app\application.py`` and open the provided link to the host port.
 * Enter a valid username that corresponds to any **reviewerID** value from the transformed collection in the MongoDB database (the password doesn't matter).
 * On the ``/dashboard`` page, click on the **Review** button and submit any content.
