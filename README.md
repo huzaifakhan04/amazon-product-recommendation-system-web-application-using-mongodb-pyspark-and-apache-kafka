@@ -1,4 +1,4 @@
-# Amazon.com Product Recommendation System Web Application Using MongoDB, PySpark, & Apache Kafka:
+# Amazon.com Product Recommendation System Web Application (Flask) Using MongoDB, PySpark, & Apache Kafka:
 
 This repository builds upon the work of [**Exploratory Data Analysis (EDA) on Amazon Review Data (2018) Using MongoDB & PySpark**](https://github.com/huzaifakhan04/exploratory-data-analysis-on-amazon-review-data-using-mongodb-and-pyspark) and includes a web application that is connected to a product recommendation system developed with the comprehensive Amazon Review Data (2018) dataset, consisting of nearly 233.1 million records and occupying approximately 128 gigabytes (GB) of data storage, using MongoDB, PySpark, and Apache Kafka, as part of the final project for the Fundamental of Big Data Analytics (DS2004) course.
 
