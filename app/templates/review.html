@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+		<title>Amazon.com : Write Your Review</title>
+		<style>
+
+			body
+
+			{
+				background: linear-gradient(to bottom, #FFB03E, #FAAC3B);
+				background-attachment: fixed;
+				font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+				box-sizing: border-box;
+			}
+
+			.container
+			
+			{
+				margin: 50px auto;
+				padding: 40px;
+				background: white;
+				box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+				border-radius: 20px;
+				width: 100%;
+				max-width: 500px;
+			}
+
+			.logo
+			
+			{
+				background-image: url("{{ url_for('static', filename='secondary_logo.png') }}");
+				background-repeat: no-repeat;
+				background-size: contain;
+				width: 100%;
+				height: 100px;
+				margin-bottom: 50px;
+				display: block;
+				margin-left: auto;
+				margin-right: auto;
+				background-position: center;
+			}
+
+			h1
+			
+			{
+				font-size: 28px;
+				margin: 0;
+				margin-bottom: 20px;
+				color: #454545;
+				text-align: left;
+			}
+
+			label
+			
+			{
+				margin-top: 10px;
+				display: block;
+				width: 500px;
+			}
+
+			label[for="image"]
+			
+			{
+				display: block;
+				margin: 20px auto;
+				font-size: 18px;
+				font-weight: bold;
+				text-align: left;
+				color: #454545;
+			}
+
+			label[for="review"]
+			
+			{
+				display: block;
+				margin: 20px auto;
+				font-size: 18px;
+				font-weight: bold;
+				text-align: left;
+				color: #454545;
+			}
+
+			input[type="text"], input[type="email"], select, textarea
+			
+			{
+				width: 100%;
+				padding: 15px;
+				margin: 10px 0 20px;
+				box-sizing: border-box;
+				border: none;
+				border-radius: 10px;
+				font-size: 16px;
+				font-family: inherit;
+				background-color: #F3F3F3;
+			}
+
+			input[type="submit"]
+			
+			{
+				display: block;
+				background-color: #FF9902;
+				color: white;
+				padding: 11px;
+				margin: 30px auto 10px;
+				border: none;
+				border-radius: 10px;
+				font-size: 17px;
+				font-weight: bold;
+				cursor: pointer;
+				letter-spacing: 1px;
+				transition: all 0.2s ease-in-out;
+				width: 40%;
+				box-sizing: border-box;
+				text-transform: none;
+			}
+
+			input[type="submit"]:hover
+			
+			{
+				background-color: #454545;
+				transform: scale(1.05);
+			}
+
+			input[type="file"]
+			
+			{
+				display: block;
+				width: 100%;
+				margin: 0 auto;
+				padding: 10px;
+				border-radius: 15px;
+				font-size: 16px;
+				background-color: #F3F3F3;
+				transition: border-color 0.3s ease-in-out;
+				cursor: pointer;
+				position: relative;
+				outline: none;
+			}
+
+			input[type="file"]::file-selector-button
+			
+			{
+				display: none;
+			}
+
+			input[type="file"]::before
+			
+			{
+				content: url("../static/upload.png");
+				display: block;
+				text-align: center;
+				font-size: 0;
+				margin-bottom: 5px;
+				background-size: contain;
+				background-repeat: no-repeat;
+				background-position: center;
+				position: relative;
+				top: 50%;
+			}
+
+			input[type="file"]::after
+			
+			{
+				content: "or drag and drop here";
+				display: block;
+				margin-bottom: 9px;
+				text-align: center;
+				font-size: 14px;
+				color: #888;
+			}
+
+			.star-rating
+
+			{
+				display: inline-block;
+				font-size: 0;
+				margin: 20px 0;
+			}
+
+			.star-rating .fa
+
+			{
+				font-size: 24px;
+				margin-right: 5px;
+				color: #CCC;
+				cursor: pointer;
+			}
+
+			.star-rating .fa.fa-star.active
+			
+			{
+				color: #FFB03E;
+			}
+
+		</style>
+		<script>
+
+			window.addEventListener("DOMContentLoaded", function()
+			{
+				var stars=document.querySelectorAll(".star-rating .fa");
+				stars.forEach(function(star, index)
+				{
+					star.addEventListener("click", function()
+					{
+						stars.forEach(function(s)
+						{
+							s.classList.remove("active");
+						});
+						for(var i=0; i<=index; i++)
+						{
+							stars[i].classList.add("active");
+						}
+						document.getElementById("rating").value=index+1;
+					});
+				});
+			});
+
+		</script>
+	</head>
+	<body>
+		<div class="container">
+			<form action="/submit_review" method="POST">
+				<label for="name"></label>
+				<input type="text" id="name" name="name" required placeholder="Name">
+				<label for="email"></label>
+				<input type="email" id="email" name="email" required placeholder="E-mail">
+				<label for="rating"></label>
+				<input type="hidden" id="rating" name="rating" required placeholder="Review">
+				<div class="star-rating">
+					<span class="fa fa-star"></span>
+					<span class="fa fa-star"></span>
+					<span class="fa fa-star"></span>
+					<span class="fa fa-star"></span>
+					<span class="fa fa-star"></span>
+				</div>
+				<label for="review">Write Your Review</label>
+				<textarea id="review" name="review" placeholder="Would you like to write anything about this product?"></textarea>
+				<label for="image">Add Photo</label>
+				<input type="file" id="image" name="image" accept="image/*" style="color:transparent;" onchange="this.style.color='#F3F3F3';">
+				<input type="submit" value="Submit Review">
+				<script>
+					var inputs=document.querySelectorAll(`input[type="file"]`);
+					inputs.forEach(function(input)
+					{
+						input.addEventListener("change", function(e)
+						{
+							if(e.target.files.length)
+							{
+								e.target.previousElementSibling.textContent=e.target.files[0].name;
+							}
+						});
+					});
+				</script>
+			</form>
+		</div>
+	</body>
+</html>

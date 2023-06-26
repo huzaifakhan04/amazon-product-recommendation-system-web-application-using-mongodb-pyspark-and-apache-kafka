@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Amazon Sign-In</title>
+		<style>
+
+			body
+			
+			{
+				background: linear-gradient(to bottom, #FFB03E, #FAAC3B);
+				background-attachment: fixed;
+				font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+				margin: 0;
+				padding: 0;
+			}
+	
+			.container
+
+			{
+				margin: auto;
+				max-width: 320px;
+				padding: 40px;
+				background: white;
+				box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+				border-radius: 20px;
+				position: absolute;
+				top: 50%;
+				left: 50%;
+				transform: translate(-50%, -50%);
+			}
+
+			.logo
+			
+			{
+				background-image: url("{{ url_for('static', filename='secondary_logo.png') }}");
+				background-repeat: no-repeat;
+				background-size: contain;
+				width: 100%;
+				height: 100px;
+				margin-bottom: 50px;
+				display: block;
+				margin-left: auto;
+				margin-right: auto;
+				background-position: center;
+			}
+
+			h1
+			
+			{
+				font-size: 28px;
+				margin: 0;
+				margin-bottom: 20px;
+				color: #454545;
+				text-align: left;
+			}
+
+			input[type=text], input[type=password]
+			
+			{
+				width: 100%;
+				padding: 15px;
+				margin: 10px 0 20px;
+				box-sizing: border-box;
+				border: none;
+				border-radius: 10px;
+				font-size: 16px;
+				background-color: #F3F3F3;
+				color: black;
+			}
+
+			button[type=submit]
+			
+			{
+				display: block;
+				background-color: #FF9902;
+				color: white;
+				padding: 11px;
+				margin: 100px auto 10px;
+				border: none;
+				border-radius: 10px;
+				font-size: 17px;
+				font-weight: bold;
+				cursor: pointer;
+				letter-spacing: 1px;
+				transition: all 0.2s ease-in-out;
+				width: 50%;
+				box-sizing: border-box;
+				text-transform: none;
+			}
+
+			button[type=submit]:hover
+			
+			{
+				background-color: #454545;
+				transform: scale(1.05);
+			}
+
+			form
+			
+			{
+				margin-top: 20px;
+			}
+
+			.text-center
+			
+			{
+				text-align: center;
+			}
+
+			.checkbox
+			
+			{
+				vertical-align: middle;
+				margin-right: 5px;
+				cursor: pointer;
+				float: left;
+				margin-top: 3%;
+			}
+
+			.wrapper
+			
+			{
+				display: inline-block;
+				vertical-align: middle;
+				cursor: pointer;
+			}
+
+			.checkbox:checked + .wrapper
+			
+			{
+				background-color: #FF9902;
+			}
+
+			.checkbox:checked + .wrapper:after
+			
+			{
+				content: '';
+				display: block;
+				width: 5px;
+				height: 10px;
+				border: solid white;
+				border-width: 0 2px 2px 0;
+				transform: rotate(45deg);
+				position: absolute;
+				top: 3px;
+				left: 7px;
+			}
+			
+			.remember-me
+			
+			{
+				vertical-align: middle;
+				margin: 10px 0;
+				font-size: 14px;
+				color: #B4B4B4;
+				text-decoration: none;
+				float: left;
+			}
+
+			.forgot-password
+			
+			{
+				vertical-align: middle;
+				font-size: 14px;
+				color: rgb(0, 183, 255);
+				text-decoration: none;
+				float: right;
+				margin-top: 10px;
+			}
+
+			.forgot-password:hover
+			
+			{
+				color: #454545;
+			}
+
+			.terms-of-use
+			
+			{
+				font-size: 12px;
+				color: #B4B4B4;
+				text-decoration: none;
+				text-align: center;
+				margin-top: 30px;
+			}
+
+			.terms-of-use a
+			
+			{
+				color: rgb(0, 183, 255);
+				text-decoration: none;
+			}
+
+			.terms-of-use a:hover
+			
+			{
+				color: #454545;
+			}
+
+		</style>
+	</head>
+	<body>
+		<div class="container">
+			<div class="logo"></div>
+			<h1>Sign In</h1>
+			<form action="{{ url_for('login') }}" method="POST">
+				<label for="username"></label>
+				<input type="text" id="username" name="username" placeholder="Username">
+				<label for="password"></label>
+				<input type="password" id="password" name="password" placeholder="Password">
+				<div class="text-center">
+					<label class="checkbox">
+						<input type="checkbox" aria-label="remember-me">
+						<span class="wrapper"></span>
+					</label>
+					<a class="remember-me">Keep me logged in</a>
+					<a href="#" class="forgot-password">Forgot password?</a>
+				</div>
+				<button type="submit">Continue</button>
+			</form>
+			<p class="terms-of-use">By continuing, you agree to Amazon's&nbsp;<a href="#" class="terms-of-use">Terms of Use.</a></p>
+		</div>
+	</body>
+</html>

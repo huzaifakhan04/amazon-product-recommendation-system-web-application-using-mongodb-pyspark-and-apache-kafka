@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Amazon.com. Spend less. Smile more.</title>
+        <style>
+
+            *
+            
+            {
+                box-sizing: border-box;
+                margin: 0;
+                padding: 0;
+            }
+
+            body
+            
+            {
+                background-color: #F5F5F5;
+                font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+            }
+
+            header
+            
+            {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                padding: 10px 20px;
+                background-color: #161D25;
+                height: 80px;
+                color: white;
+                position: fixed;
+                top: 0;
+                width: 100%;
+                z-index: 1;
+                border-bottom: 3px solid #424B54;
+            }
+            
+            .header img
+
+            {
+                width: 110px;
+                height: auto;
+                margin-right: 20px;
+                margin-left: 20px;
+            }
+
+            .header-icons
+            
+            {
+                display: flex;
+                justify-content: flex-end;
+                align-items: center;
+            }
+
+            .header-icons i
+            
+            {
+                font-size: 24px;
+                margin-left: 15px;
+                cursor: pointer;
+            }
+
+            .icon-container
+            
+            {
+                display: flex;
+                align-items: center;
+                gap: 15px;
+            }
+
+            .icon-container img
+            
+            {
+                width: 25px;
+                height: auto;
+                cursor: pointer;
+            }
+
+            .icon-container img:hover
+            
+            {
+                transform: scale(1.1);
+            }
+
+            .icon-container img:nth-child(4)
+            
+            {
+                width: 45px;
+                height: auto;
+                border-radius: 50%;
+                border: 2px solid #FF9902;
+                padding: 3px;
+            }
+
+            .icon-notification
+            
+            {
+                position: relative;
+            }
+
+            .icon-notification span
+            
+            {
+                position: absolute;
+                top: -8px;
+                background-color: red;
+                color: white;
+                border-radius: 50%;
+                width: 20px;
+                height: 20px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                font-size: 12px;
+                font-weight: bold;
+            }
+
+            .search-bar
+            
+            {
+                position: relative;
+                flex: 1;
+                max-width: 550px;
+                margin-top: auto;
+                margin-bottom: auto;
+                margin-right: 8%;
+            }
+
+            .search-bar input[type="text"]
+            
+            {
+                width: 100%;
+                padding: 12px 20px;
+                margin: 8px 0;
+                box-sizing: border-box;
+                border: 3px solid #424B54;
+                border-radius: 13px;
+                background-color: #2D3C4C;
+                font-size: 15px;
+                color: white;
+                background-position: 10px 10px;
+                background-repeat: no-repeat;
+                text-indent: 30px;
+            }
+
+            .search-bar::after
+
+            {
+                content: "";
+                background-image: url("{{ url_for('static', filename='search.png') }}");
+                background-size: 22px;
+                background-repeat: no-repeat;
+                background-position: center;
+                position: absolute;
+                top: 49%;
+                right: 0;
+                transform: translateY(-50%);
+                color: white;
+                background-color: #FF9902;
+                padding: 12px 20px;
+                border-radius: 0 13px 13px 0;
+                cursor: pointer;
+                width: 10px;
+                height: 22px;
+                text-align: center;
+            }
+
+            .search-bar::after:hover
+
+            {
+                background-color: black;
+            }
+
+            .search-bar input[type="text"]:focus
+
+            {
+                outline: none;
+                border: 3px solid #FF9902;
+            }
+
+            .search-bar input[type="text"]::placeholder
+
+            {
+                color: white;
+            }
+
+            .hero
+
+            {
+                background-image: url("{{ url_for('static', filename='hero.png') }}");
+                background-size: cover;
+                background-position: center;
+                width: 1120px;
+                height: 221px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                text-align: center;
+                color: white;
+                margin: 0 auto;
+                margin-top: 1%;
+            }
+
+            .recently-purchased
+            
+            {
+                font-size: 24px;
+                font-weight: bold;
+                color: #454545;
+                text-align: left;
+                margin-left: 7%;
+                margin-top: 50px;
+            }
+
+            .sidebar
+
+            {
+                width: 270px;
+                height: 100vh;
+                background-color: #161D25;
+                display: flex;
+                flex-direction: column;
+                top: 0;
+                left: 0;
+                bottom: 0;
+                float: left;
+                position: fixed;
+                border-right: 3px solid #424B54;
+                z-index: 0;
+            }
+
+            .menu
+
+            {
+                list-style: none;
+                padding: 0;
+                flex-grow: 1;
+                display: flex;
+                flex-direction: column;
+                margin-top: 36%;
+                margin-left: 5%;
+                margin-right: 5%;
+            }
+
+            .menu li
+
+            {
+                padding: 8%;
+                text-align: left;
+                display: flex;
+                align-items: center;
+            }
+
+            .menu li:last-child
+
+            {
+                border-top: none;
+                margin-top: auto;
+                margin-bottom: 7%;
+            }
+
+            .menu li a
+
+            {
+                color: white;
+                text-decoration: none;
+                font-size: 1rem;
+                font-weight: bold;
+            }
+
+            .menu li:hover
+
+            {
+                background-color: #2D3C4C;
+                border-radius: 15px;
+            }
+
+            .menu li:before
+
+            {
+                content: "";
+                display: inline-block;
+                width: 1em;
+                height: 1em;
+                margin-right: 9%;
+                background-size: contain;
+                background-repeat: no-repeat;
+            }
+
+            .menu li:nth-child(1):before
+
+            {
+                background-image: url("{{ url_for('static', filename='categories.png') }}");
+            }
+
+            .menu li:nth-child(2):before
+
+            {
+                background-image: url("{{ url_for('static', filename='sell.png') }}");
+            }
+
+            .menu li:nth-child(3):before
+
+            {
+                background-image: url("{{ url_for('static', filename='help.png') }}");
+            }
+
+            .menu li:nth-child(4):before
+
+            {
+                background-image: url("{{ url_for('static', filename='logout.png') }}");
+            }
+
+            main
+
+            {
+                margin-top: 70px;
+                margin-left: 270px;
+                padding: 20px;
+            }
+
+            .product-container
+
+            {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: center;
+                align-items: center;
+                margin: 20px;
+            }
+
+            .product-card
+
+            {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                width: 300px;
+                margin: 20px;
+                padding: 20px;
+                background-color: white;
+                border-radius: 20px;
+                transition: all 0.2s ease-in-out;
+            }
+
+            .product-image
+                
+            {
+                width: 100%;
+                height: 250px;
+                background-color: white;
+                background-position: center;
+                background-size: contain;
+                background-repeat: no-repeat;
+                margin-bottom: 20px;
+                border-radius: 5px;
+            }
+
+            .product-card:nth-child(1) .product-image
+
+            {
+                background-image: url("{{ url_for('static', filename='product_one.jpg') }}");
+            }
+
+            .product-card:nth-child(2) .product-image
+
+            {
+                background-image: url("{{ url_for('static', filename='product_two.jpg') }}");
+            }
+
+            .product-card:nth-child(3) .product-image
+
+            {
+                background-image: url("{{ url_for('static', filename='product_three.jpg') }}");
+            }
+
+            .product-card:nth-child(4) .product-image
+
+            {
+                background-image: url("{{ url_for('static', filename='product_four.jpg') }}");
+            }
+
+            .product-name
+
+            {
+                font-size: 24px;
+                margin: 10px 0;
+                color: #454545;
+                text-align: center;
+                font-weight: bold;
+            }
+
+            .product-price
+
+            {
+                font-size: 32px;
+                font-weight: bold;
+                color: #454545;
+                margin-bottom: 10px;
+            }
+
+            .product-description
+
+            {
+                font-size: 16px;
+                margin: 10px 0;
+                color: #666;
+                text-align: center;
+                height: 100px;
+                overflow: hidden;
+            }
+
+            .review-button
+        
+            {
+                background-color: #FF9902;
+                color: white;
+                padding: 11px;
+                margin: 20px 0 10px;
+                border: none;
+                border-radius: 10px;
+                font-size: 17px;
+                font-weight: bold;
+                cursor: pointer;
+                letter-spacing: 1px;
+                transition: all 0.2s ease-in-out;
+                width: 50%;
+                text-decoration: none;
+                text-align: center;
+                display: block;
+            }
+
+            .review-button:hover
+            
+            {
+                background-color: #454545;
+                transform: scale(1.05);
+                color: white;
+            }
+
+            footer
+            
+            {
+                color: #666;
+                padding: 10px;
+                text-align: center;
+                font-size: 12px;
+                margin-top: 50px;
+            }
+
+            @media screen and (max-width: 768px)
+            
+            {
+                .product-card
+                
+                {
+                    width: 100%;
+                    margin: 20px 0;
+                }
+
+                .product-image
+                
+                {
+                    height: 150px;
+                }
+
+                .hero
+                
+                {
+                    height: 300px;
+                }
+
+                .hero h1
+                
+                {
+                    font-size: 36px;
+                }
+
+                .hero p
+                
+                {
+                    font-size: 18px;
+                }
+            }
+
+            @media screen and (max-width: 480px)
+            
+            {
+                .navbar
+
+                {
+                    padding: 5px;
+                }
+
+                .navbar li
+                
+                {
+                    margin-right: 10px;
+                }
+
+                .navbar li:last-child
+                
+                {
+                    margin-right: 0;
+                }
+
+                .navbar a
+            
+                {
+                    font-size: 16px;
+                }
+
+                .product-image
+                
+                {
+                    height: 100px;
+                }
+
+                .product-name
+                
+                {
+                    font-size: 16px;
+                }
+
+                .product-price
+                
+                {
+                    font-size: 20px;
+                }
+
+                .product-description
+                
+                {
+                    font-size: 14px;
+                }
+
+                .review-button
+                
+                {
+                    font-size: 16px;
+                }
+            }
+
+            @media screen and (max-width: 1024px)
+            
+            {
+                main
+
+                {
+                    margin-left: 0;
+                }
+            }
+
+        </style>
+    </head>
+    <body>
+        <div class="sidebar">
+            <div class="logo-container">
+            </div>
+            <ul class="menu">
+                <li><a href="#">Categories</a></li>
+                <li><a href="#">Sell on Amazon</a></li>
+                <li><a href="#">Help</a></li>
+                <li><a href="/">Log out</a></li>
+            </ul>
+        </div>
+        <header class="header">
+            <img src="{{ url_for('static', filename='primary_logo_light.png') }}" alt="Main Amazon Logo">
+            <div class="search-bar">
+                <input type="text" placeholder="Search...">
+            </div>
+            <div class="icon-container">
+                <div class="icon-notification">
+                    <img src="{{ url_for('static', filename='wishlist.png') }}" alt="Wishlist Icon">
+                </div>
+                <div class="icon-notification">
+                    <img src="{{ url_for('static', filename='cart.png') }}" alt="Shopping Cart Icon">
+                </div>
+                <div class="icon-notification">
+                    <img src="{{ url_for('static', filename='notification.png') }}" alt="Notification Icon">
+                    <span>5</span>
+                </div>
+                <img src="{{ url_for('static', filename='user.png') }}" alt="User Profile Icon">
+            </div>
+        </header>
+        <main>
+            <a href=# title="Promotional Banner">
+                <section class="hero"></section>
+            </a>
+            <h2 class="recently-purchased">Recently purchased&ensp;📦</h2>
+            <div class="product-container">
+                <div class="product-card">
+                    <div class="product-image"></div>
+                    <h2 class="product-name">1466287047</h2>
+                    <span class="product-price">$22.90</span>
+                    <p class="product-description">
+                        Chosen by <b><i>Bookbub</i></b> readers as one of the <b><i>Top 100 Crime Novels of All Time</i></b>.
+                        A preacher is found brutally murdered in a Tennessee motel room.
+                        A beautiful...
+                    </p>
+                    <a href="{{ url_for('review') }}" class="review-button">Review</a>
+                </div>
+                <div class="product-card">
+                    <div class="product-image"></div>
+                    <h2 class="product-name">B0083Q04IQ</h2>
+                    <span class="product-price">$150.00</span>
+                    <p class="product-description">
+                        Round watch featuring black glossy dial with gold-tone hands and stick markers.
+                        Set includes a chain bracelet, a bangle with enamel inlay, and a bangle accented...
+                    </p>
+                    <a href="{{ url_for('review') }}" class="review-button">Review</a>
+                </div>
+                <div class="product-card">
+                    <div class="product-image"></div>
+                    <h2 class="product-name">0060590327</h2>
+                    <span class="product-price">$21.99</span>
+                    <p class="product-description">
+                        100% Cotton. Pull On closure. Machine Wash
+                        Now you can show that you are a fan with this Mr. T t-shirt.
+                        Our Mr. T mens shirt is great for any fan.
+                        Available in sizes...
+                    </p>
+                    <a href="{{ url_for('review') }}" class="review-button">Review</a>
+                </div>
+                <div class="product-card">
+                    <div class="product-image"></div>
+                    <h2 class="product-name">B000FMKU08</h2>
+                    <span class="product-price">$24.61</span>
+                    <p class="product-description">
+                        <b>Recommended by <i>Rolling Stone</i> Magazine as the best beginner piano book, this book and streaming
+                        video course is all that you will ever need for getting...</b>
+                    </p>
+                    <a href="{{ url_for('review') }}" class="review-button">Review</a>
+                </div>
+            </div>
+            <footer>
+                <div class="container">
+                    <p>&copy; 1996-2023, Amazon.com, Inc. or its affiliates</p>
+                </div>
+            </footer>
+        </main>      
+    </body>
+</html>
